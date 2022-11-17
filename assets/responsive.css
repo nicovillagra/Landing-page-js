@@ -1,0 +1,21 @@
+@media (max-width: 900px){
+    .img-carrusel1{
+        height: 230px;
+    }
+    .img-carrusel2{
+        height: 230px;
+    }
+    .img-carrusel3{
+        height: 230px;
+    }
+    .container-slider{
+        height: 230px;
+    }
+    .contenido-slider{
+    height: 230px;
+    }
+    li{
+        font-size: 25px;
+    }
+
+}

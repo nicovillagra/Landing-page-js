@@ -19,15 +19,19 @@
             <h2 class="cart-text">Tu compra</h2>
             <div class="productContainer"></div>
             <div class="barra"></div>
-            <h2 class="cart-text">Total:0</h2>
-            <button class="button-cart">Comprar</button>
+            <div class="cart-total">
+                <h2 class="cart-text">Total:</h2>
+                <span id="total-number">0</span>
+            </div>
+            <button class="btn-comprar">Comprar</button>
+            <button class="btn-borrar">Vaciar carrito</button>
         </div>
         <nav class="hidden">
             <ul class="nav-list">
                 <li><a href="">Inicio</a></li>
                 <li><a href="">Comprar</a></li>
-                <li><a href="">Login</a></li>
-                <li><a href="">Registrarse</a></li>
+                <li><a href="./login.html">Login</a></li>
+                <li><a href="./register.html">Registrarse</a></li>
             </ul>
         </nav>
         <div class="button-div">
@@ -136,7 +140,7 @@
                     <input class="input" placeholder="Nombre" type="text">
                     <input class="input" placeholder="Email" type="email">
                     <input class="input" placeholder="compañia/organizacion" type="text">
-                    <input class="input" placeholder="Tu Mensaje" type="text">  
+                    <input class="input" placeholder="Tu Mensaje" type="text">
                     <button class="btn">Submit</button>
                 </form>
             </div>
@@ -144,6 +148,9 @@
         </div>
 
     </section>
+    <footer>
+        <img src="./assets/logo.png" alt="" srcset="">
+    </footer>
     <script src="bars-cart.js"></script>
     <script src="main.js"></script>
     <script src="slider.js"></script>

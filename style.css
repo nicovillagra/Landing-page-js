@@ -10,6 +10,9 @@
 body{
         background-color: #000000;
 }
+html{
+        scroll-behavior: smooth;
+}
 .hidden{
         display: none;
 }
@@ -282,7 +285,7 @@ li{
 }
 .container-offer{
     width: 100%;
-    height: 600px;
+    height:109rem;
     background-color: black;
     display: flex;
     align-items: center;
@@ -291,13 +294,25 @@ li{
     gap: 30px;
 
 }
-.container-shoes{
+.cart-total{
         display: flex;
-        gap: 30px;
+        justify-content: center;
+        align-items: center;
 }
+.cart-total span {
+        font-size: 20px;
+        text-align: center;
+}
+.container-shoes{
+        display: grid;
+        width: 100%;
+        gap: 30px;
+        grid-template-columns: auto auto auto;
+        grid-template-rows: auto auto auto;
+    }
 .card {
         width: 290px;
-        height: 512px;
+        height: 532px;
         padding: .8em;
         background: #ffffff;
         position: relative;
@@ -475,6 +490,12 @@ li{
         display: flex;
         justify-content: center;
 }
+.disabled {
+        background-color: var(--text-gray);
+        color: white;
+        cursor: not-allowed;
+        border: none;
+      }
 .button-div{
         display: flex;
 }
@@ -517,7 +538,7 @@ height: 900px;
         background-color: white;
         border-radius: 3px;
 }
-.button-cart{
+.btn-comprar{
         -webkit-appearance: none;
         -moz-appearance: none;
              appearance: none;
@@ -551,11 +572,11 @@ height: 900px;
      will-change: transform;
     }
     
-.button-cart:disabled {
+.btn-comprar:disabled {
      pointer-events: none;
     }
     
-.button-cart:hover {
+.btn-comprar:hover {
      color: rgb(255, 255, 255);
      background-color: #1A1A1A;
      -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
@@ -565,7 +586,66 @@ height: 900px;
              transform: translateY(-2px);
     }
     
-.button-cart:active {
+.btn-comprar:active {
+     -webkit-box-shadow: none;
+             box-shadow: none;
+     -webkit-transform: translateY(0);
+         -ms-transform: translateY(0);
+             transform: translateY(0);
+    }
+    .btn-borrar{
+        -webkit-appearance: none;
+        -moz-appearance: none;
+             appearance: none;
+     background-color: transparent;
+     border: 0.125em solid #ffffff;
+     border-radius: 0.9375em;
+     -webkit-box-sizing: border-box;
+             box-sizing: border-box;
+     color: #ffffff;
+     cursor: pointer;
+     display: inline-block;
+     font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+     font-size: 16px;
+     font-weight: 600;
+     line-height: normal;
+     margin: 0;
+     min-height: 3.75em;
+     min-width: 0;
+     outline: none;
+     padding: 1em 2.3em;
+     text-align: center;
+     text-decoration: none;
+     -webkit-transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+     transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+     -webkit-user-select: none;
+     -ms-touch-action: manipulation;
+         touch-action: manipulation;
+     will-change: transform;
+    }
+    
+.btn-borrar:disabled {
+     pointer-events: none;
+    }
+.cart-product-text-container{
+        display: flex;
+        color: black;
+        flex-direction: column;
+}
+.btn-borrar:hover {
+     color: rgb(255, 255, 255);
+     background-color: #1A1A1A;
+     -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+             box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+     -webkit-transform: translateY(-2px);
+         -ms-transform: translateY(-2px);
+             transform: translateY(-2px);
+    }
+    
+.btn-borrar:active {
      -webkit-box-shadow: none;
              box-shadow: none;
      -webkit-transform: translateY(0);
@@ -703,7 +783,7 @@ height: 900px;
 
 .container-about{
         width: 100%;
-        height: 600px;
+        height: 800px;
         display: flex;
         gap: 70px;
         flex-direction: column;
@@ -801,4 +881,11 @@ input:nth-child(5){
         display: flex;
         flex-direction: column;
         gap: 30px;
+}
+footer{
+        width: 100%;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 }

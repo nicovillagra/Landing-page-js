@@ -1,63 +1,124 @@
-const listArticle = [
+let listArticle = [
     {
         id:1,
         nombre:'Vans Old',
-        precio:'14.000',
+        precio:14.000,
         detalles:'Las Old Skool son las zapatillas clásicas de Vans y el primer modelo en lucir el icónico sidestripe de la marca.',
-        imagen:'./assets/zapatilla1.jpg'
+        imagen:'./assets/zapatilla1.jpg',
+        cantidad:1
     },
     {
         id:2,
         nombre:'Nike Dunk',
-        precio:'32.000',
+        precio:32.000,
         detalles:'Las zapatillas Nike Dunk Hi Retro forman parte de la línea "Nike Athletic Club" que conmemora a los clubes deportivos de las décadas de los 70 y 80.',
-        imagen:'./assets/zapatilla2.jpg'
+        imagen:'./assets/zapatilla2.jpg',
+        cantidad:1
     },
     {
         id:3,
         nombre:'Adidas Forum',
-        precio:'23.000',
+        precio:23.000,
         detalles:'Más que un calzado, es una declaración de estilo. Las adidas Forum llegaron a la escena en el 84 y ganaron seguidores en la cancha y en el mundo de la música.',
-        imagen:'./assets/zapatilla3.jpg'
+        imagen:'./assets/zapatilla3.jpg',
+        cantidad:1
     }
 ]
 const containerShoes = document.querySelector('.container-shoes')
-let list = JSON.parse(localStorage.getItem("listArticle")) || []; 
+const carritoContenedor = document.querySelector('.productContainer')
+const vaciarCarrito = document.querySelector('.btn-borrar')
+const contadorCarrito = document.getElementById('contador-productos')
+const precioTotal = document.getElementById('total-number')
+let carrito = []
 
-  console.log(list)
-const saveLocalStorage = () => {
-    localStorage.setItem('list', JSON.stringify(list))
-}
-const render = (data )=>{
-    const {id,nombre,detalles,precio,imagen} = data
-    return `
-    <div class="card" data-id="${id}">
-    <div class="card-img"><img src="${imagen}" alt="" class="card-img"></div>
+document.addEventListener('DOMContentLoaded', () =>{
+    if(localStorage.getItem('carrito')){
+        carrito = JSON.parse(localStorage.getItem('carrito'))
+        actualizarCarrito()
+    }
+})
+
+vaciarCarrito.addEventListener('click',() =>{
+    carrito.length = 0
+    actualizarCarrito()
+})
+
+
+const renderCardArticle = (lista,contenedor) =>{
+    lista.forEach((producto)=>{
+    const div = document.createElement('div')
+    div.classList.add('Card')
+    div.innerHTML = `
+    <div class="card-img"><img src="${producto.imagen}" alt="" class="card-img"></div>
     <div class="card-info">
-        <p class="text-title">${nombre} </p>
-        <p class="text-body">${detalles}</p>
+        <p class="text-title">${producto.nombre} </p>
+        <p class="text-body">${producto.detalles}</p>
     </div>
-    <div class="card-footer">
-        <span class="text-title">$${precio}</span>
-        <div class="card-button">
-            <svg class="svg-icon" viewBox="0 0 20 20">
-                <path
-                    d="M17.72,5.011H8.026c-0.271,0-0.49,0.219-0.49,0.489c0,0.271,0.219,0.489,0.49,0.489h8.962l-1.979,4.773H6.763L4.935,5.343C4.926,5.316,4.897,5.309,4.884,5.286c-0.011-0.024,0-0.051-0.017-0.074C4.833,5.166,4.025,4.081,2.33,3.908C2.068,3.883,1.822,4.075,1.795,4.344C1.767,4.612,1.962,4.853,2.231,4.88c1.143,0.118,1.703,0.738,1.808,0.866l1.91,5.661c0.066,0.199,0.252,0.333,0.463,0.333h8.924c0.116,0,0.22-0.053,0.308-0.128c0.027-0.023,0.042-0.048,0.063-0.076c0.026-0.034,0.063-0.058,0.08-0.099l2.384-5.75c0.062-0.151,0.046-0.323-0.045-0.458C18.036,5.092,17.883,5.011,17.72,5.011z">
-                </path>
-                <path
-                    d="M8.251,12.386c-1.023,0-1.856,0.834-1.856,1.856s0.833,1.853,1.856,1.853c1.021,0,1.853-0.83,1.853-1.853S9.273,12.386,8.251,12.386z M8.251,15.116c-0.484,0-0.877-0.393-0.877-0.874c0-0.484,0.394-0.878,0.877-0.878c0.482,0,0.875,0.394,0.875,0.878C9.126,14.724,8.733,15.116,8.251,15.116z">
-                </path>
-                <path
-                    d="M13.972,12.386c-1.022,0-1.855,0.834-1.855,1.856s0.833,1.853,1.855,1.853s1.854-0.83,1.854-1.853S14.994,12.386,13.972,12.386z M13.972,15.116c-0.484,0-0.878-0.393-0.878-0.874c0-0.484,0.394-0.878,0.878-0.878c0.482,0,0.875,0.394,0.875,0.878C14.847,14.724,14.454,15.116,13.972,15.116z">
-                </path>
-            </svg>
-        </div>
-    </div>
-</div>
-`
-}
-const renderCards = shoes => containerShoes.innerHTML = shoes.map(render).join('');
-window.addEventListener('DOMContentLoaded', renderCards(listArticle));
 
+        <span class="text-title">$${producto.precio}</span>
+        <button class="card-button" id="cart-button ${producto.id}">Comprar</button>
+`
+    contenedor.appendChild(div)
+    const boton = document.getElementById(`cart-button ${producto.id}`)
+    boton.addEventListener('click', ()=>{
+        agregarAlCarrito(producto.id)
+    })
+})}
+const agregarAlCarrito = (prodId)=>{
+    const existe = carrito.some(prod => prod.id === prodId)
+    if(existe){
+        const prod = carrito.map(prod => {
+            if(prod.id === prodId){
+                prod.cantidad++
+            }
+        })
+    } else {
+
+
+    const item = stock.find(prod=> prod.id === prodId)
+    carrito.push(item)
+    actualizarCarrito()
+    console.log(carrito)
+
+}
+actualizarCarrito()}
+const eliminarDelCarrito = (prodId) =>{
+    const item = carrito.find((prod)=> prod.id === prodId)
+    const indice = carrito.indexOf(item)
+    carrito.splice(indice, 1)
+    actualizarCarrito()
+
+}
+
+const actualizarCarrito = () =>{
+    carritoContenedor.innerHTML = ""
+    carrito.forEach((prod) => {
+        const div = document.createElement('div')
+        div.className = ('card-Product')
+        div.innerHTML = `
+        <div class="card-Product">
+        <div class="card__content">
+        <img src="${prod.imagen}" alt="" class="img-cart">
+        <div class= "cart-product-text-container">
+        <span class="cart-product-text">${prod.nombre}</span>
+        <span class="cart-product-text">${prod.precio}$</span>
+        </div>
+        <div class= "cart-product-text-container">
+        <p>Cantidad:<span class="cart-product-text" id="cantidad">${prod.cantidad}</span></p>
+        <button onclick = "eliminarDelCarrito(${prod.id})" class="btn-eliminar">Eliminar</button>
+        </div></div>
+        `
+        carritoContenedor.appendChild(div)
+        
+        localStorage.setItem('carrito', JSON.stringify(carrito))
+    })
+    contadorCarrito.innerText = carrito.length
+    precioTotal.innerText = carrito.reduce((acc,prod) => acc + prod.precio* prod.cantidad, 0)
+}
+buttonVans.addEventListener('click',()=>{
+    containerMarcas2.classList.toggle('hidden')
+    renderCardArticle(shoesList,containerMarcas)
+})
+renderCardArticle(stock,containerShoes)
 
 

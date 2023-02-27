@@ -1,4 +1,5 @@
 const barsMenu = document.querySelector('.open')
+const products = document.querySelector('.card')
 const nav = document.querySelector('nav')
 const cartContainer = document.getElementById('cart-list')
 const cartOpen = document.querySelector('.open-cart')
@@ -9,8 +10,12 @@ const buttonNike = document.getElementById('buttonNike')
 const buttonAdidas = document.getElementById('buttonAdidas')
 const containerMarcas = document.querySelector('.container-filter-shoes')
 const containerMarcas2 = document.querySelector('.card-marca')
-const cartButton = document.querySelector('.card-button')
+const cartButton = document.getElementById('cart-button')
 const productContainer = document.querySelector('.productContainer')
+const total = document.getElementById('total-number')
+const cartBubble = document.getElementById('contador-productos')
+const btnComprar = document.querySelector('.btn-comprar')
+const btnBorrar = document.querySelector('.btn-borrar')
 
 barsMenu.addEventListener('click',() =>{
     nav.classList.toggle('nav-menu')
@@ -116,18 +121,21 @@ const renderVans = (data )=>{
     </div>
     <div class="card-footer">
         <span class="text-title">$${precio}</span>
-        <button class="card-button" id="${id}">Comprar</button>
+        <div class="card-button" id="cart-button"
+        data-id='${id}'
+        data-name='${nombre}'
+        data-bid='${precio}'
+        data-img='${imagen}'>Comprar</div>
     </div>
   </div>
 `
 }
-let vansList = JSON.parse(localStorage.getItem("shoesList")) || []; 
-const saveLocalStorageVans = () => {
-    localStorage.setItem('vansList', JSON.stringify(vansList))}
+
 const rendersVans = shoes => containerMarcas.innerHTML = shoes.map(renderVans).join('');
 buttonVans.addEventListener('click',()=>{
     containerMarcas2.classList.toggle('hidden')
-    rendersVans(shoesList)
+    renderVans(shoesList)
+    
 })
 buttonNike.addEventListener('click',()=>{
     containerMarcas2.classList.toggle('hidden')
@@ -219,53 +227,13 @@ let stock = [
         cantidad: 1
     }
 ]
-let cart = []
-console.log(cart)
-// Function to add a product to cart
-function addToCart(productId) {
-    const product = stock.find(function(product) {
-        return product.id == productId;
-    });
-    if (product) {
-        cart.push(product);
-    }
+
+const init = () =>{
+//renderCartBubble()
+document.addEventListener('DOMContentLoaded',renderCart)
+//document.addEventListener('DOMContentLoaded', showTotal)
+//products.addEventListener('click', addProd)
+//deleteBtn(btnComprar)
 }
+init()
 
-// Function to remove a product from cart
-function removeFromCart(productId) {
-    const productIndex = cart.findIndex(function(product) {
-        return product.id == productId;
-    });
-    if (productIndex > -1) {
-        cart.splice(productIndex, 1);
-    }
-}
-
-// Function to calculate the total cost of cart
-function getCartTotal() {
-    return cart.reduce(function(total, product) {
-        return total + product.precio * product.cantidad;
-    }, 0);
-}
-
-// Add products to cart
-addToCart();
-addToCart();
-
-// Calculate the total cost of cart
-console.log(getCartTotal()); // 14.98
-
-// Remove a product from cart
-removeFromCart(1);
-
-// Calculate the total cost of cart again
-console.log(getCartTotal()); // 4.99
-
-cartButton.addEventListener('click',addToCart)
-const renderCart = () => {
-    if (!cart.length) {
-      cartContainer.innerHTML = `<p class="empty-msg">No hay productos en el carrito.</p>`;
-      return;
-    }
-    cartContainer.innerHTML = cart.map(renderCartProduct).join('');
-  };

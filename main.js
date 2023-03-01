@@ -105,7 +105,7 @@ const actualizarCarrito = () =>{
         </div>
         <div class= "cart-product-text-container">
         <p>Cantidad:<span class="cart-product-text" id="cantidad">${prod.cantidad}</span></p>
-        <button onclick = "eliminarDelCarrito(${prod.id})" class="btn-eliminar">Eliminar</button>
+        <button onclick = "eliminarDelCarrito(${prod.id})" class="btn-eliminar"><i class="fa-solid fa-trash"></i></button>
         </div></div>
         `
         carritoContenedor.appendChild(div)

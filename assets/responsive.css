@@ -17,5 +17,85 @@
     li{
         font-size: 25px;
     }
+    .cart-container{
+        height: 70rem;
+        margin-left: 75%;
+        width: 25%;
+        margin-top:76rem;
+    }
+    .card-img{
+        width: 235px;
+        height: 230px;
+    }
+    .card{
+        width: 263px;
+        height: 477px;
+    }
+    .card-info{
+        padding-top: 0px;
+    }
+    .container-shoes{
+        gap: 15px;
+    }
+    .about-info{
+        padding: 10px;
+    }
+    .container-offer{
+        height: 100rem;
+    }
+    .cart-product-text{
+        font-size: 10px;
+    }
+    .info-card:hover{
+        height: 461px;
+    }
+    .form{
+        width: 100%;
+    }
+    }
+@media (max-width: 400px){
+.cart-product-text{
+    font-size: 10px;
+}
+.card-img{
+    width: 80px;
+    height: 114px;
+}
+.text-body{
+    display: none;
+}
+.card{
+    width: 116px;
+    height: 215px;
+}
+.text-title{
+    font-size: 10px;
+}
+.container-offer{
+    height: 50rem;
+}
+.card-marca{
+    width: 395px;
+    height: 335px;
+}
+.container-filter{
+    height: 35rem;
+}
+.container-in-about{
+    flex-direction: column;
+    align-items: center;
 
+}
+.form{
+    width:100%;
+}
+.container-about{
+    height: 930px;
+}
+.cart-container{
+    height: 70rem;
+    margin-left: 41%;
+    width: 60%;
+    margin-top: 76rem;
+}
 }
